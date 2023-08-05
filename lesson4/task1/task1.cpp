@@ -56,7 +56,7 @@ int main() {
 
     std::ofstream write("out.txt");
     write << rowQuantity << std::endl;
-    for (int i = 0; i < rowQuantity; i++) {
+    for (int i = rowQuantity-1; i >= 0; i--) {
         write << arrAddress[i] << std::endl;
     }
     write.close();
