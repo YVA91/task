@@ -21,13 +21,13 @@ private:
     int C;
 
 public:
-    Triangle() {
-        this->a = 10;
-        this->b = 20;
-        this->c = 30;
-        this->A = 10;
-        this->B = 20;
-        this->C = 30;
+    Triangle(int aa, int ab, int ac, int aA, int aB, int aC) {
+        this->a = aa;
+        this->b = ab;
+        this->c = ac;
+        this->A = aA;
+        this->B = aB;
+        this->C = aC;
     }
 
     void print() override {
@@ -48,12 +48,12 @@ private:
     int C = 90;
 
 public:
-    RightTriangle() {
-        this->a = 10;
-        this->b = 20;
-        this->c = 30;
-        this->A = 50;
-        this->B = 60;
+    RightTriangle(int aa, int ab, int ac, int aA, int aB) {
+        this->a = aa;
+        this->b = ab;
+        this->c = ac;
+        this->A = aA;
+        this->B = aB;
     }
 
     void print() override {
@@ -67,16 +67,19 @@ class Isoscelestriangle : public Figure {
 private:
     int a;
     int b;
+    int c;
     int A;
     int B;
     int C;
 
 public:
-    Isoscelestriangle() {
-        this->a = 10;
-        this->b = 20;
-        this->A = 50;
-        this->B = 60;
+    Isoscelestriangle(int aa, int ab, int aA, int aB) {
+        this->a = aa;
+        this->b = ab;
+        this->c = aa;
+        this->A = aA;
+        this->B = aB;
+        this->C = aA;
     }
 
     void print() override {
@@ -93,8 +96,8 @@ private:
 
 
 public:
-    EquilateralTriangle() {
-        this->a = 30;
+    EquilateralTriangle(int aa) {
+        this->a = aa;
     }
 
     void print() override {
@@ -116,15 +119,15 @@ private:
     int D;
 
 public:
-    Quadrilateral() {
-        this->a = 10;
-        this->b = 20;
-        this->c = 30;
-        this->d = 40;
-        this->A = 50;
-        this->B = 60;
-        this->C = 70;
-        this->D = 80;
+    Quadrilateral(int aa, int ab, int ac, int ad, int aA, int aB, int aC, int aD) {
+        this->a = aa;
+        this->b = ab;
+        this->c = ac;
+        this->d = ad;
+        this->A = aA;
+        this->B = aB;
+        this->C = aC;
+        this->D = aD;
     }
 
     void print() override {
@@ -143,9 +146,9 @@ private:
 
 
 public:
-    Rectangles() {
-        this->a = 20;
-        this->b = 20;
+    Rectangles(int aa, int ab) {
+        this->a = aa;
+        this->b = ab;
     }
 
     void print() override {
@@ -159,12 +162,11 @@ public:
 class Square : public Figure {
 private:
     int a;
-    int A;
+    int A = 90;
 
 public:
-    Square() {
-        this->a = 20;
-        this->A = 90;
+    Square(int aa) {
+        this->a = aa;
     }
 
     void print() override {
@@ -183,11 +185,11 @@ private:
     int B;
 
 public:
-    Parallelogram() {
-        this->a = 20;
-        this->b = 30;
-        this->A = 30;
-        this->B = 40;
+    Parallelogram(int aa, int ab, int aA, int aC) {
+        this->a = aa;
+        this->b = ab;
+        this->A = aA;
+        this->B = aC;
     }
 
     void print() override {
@@ -205,10 +207,10 @@ private:
     int B;
 
 public:
-    Rhomb() {
-        this->a = 30;
-        this->A = 30;
-        this->B = 40;
+    Rhomb(int aa, int aA, int aB) {
+        this->a = aa;
+        this->A = aA;
+        this->B = aB;
     }
 
     void print() override {
@@ -231,15 +233,15 @@ int main()
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
 
-    Triangle triangle;
-    RightTriangle rightTriangle;
-    Isoscelestriangle isoscelestriangle;
-    EquilateralTriangle equilateralTriangle;
-    Quadrilateral quadrilateral;
-    Rectangles rectangle;
-    Square square;
-    Parallelogram parallelogram;
-    Rhomb rhomb;
+    Triangle triangle (10, 20, 30, 50, 60, 70);
+    RightTriangle rightTriangle(10, 20, 30, 50, 60);
+    Isoscelestriangle isoscelestriangle (10, 20, 30, 40);
+    EquilateralTriangle equilateralTriangle (10);
+    Quadrilateral quadrilateral(10, 20, 30, 40, 50, 60, 70, 80);
+    Rectangles rectangle (10, 20);
+    Square square (10);
+    Parallelogram parallelogram (10, 20, 30, 40);
+    Rhomb rhomb (10, 20, 30);
 
     
     print_info(&triangle);

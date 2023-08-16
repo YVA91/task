@@ -7,14 +7,6 @@
 
 class Figure {
 protected:
-    int a = 0;
-    int b = 0;
-    int c = 0;
-    int d = 0;
-    int A = 0;
-    int B = 0;
-    int C = 0;
-    int D = 0;
     int Nsides = 0;
     std::string boolean;
     std::string name = "Фигура";
@@ -24,14 +16,6 @@ public:
         std::cout << name << ": " << std::endl;
         std::cout << boolean << std::endl;
         std::cout << "Количество сторон: " << Nsides << std::endl;
-        if (Nsides == 3) {
-            std::cout << "Стороны: " << "a = " << this->a << " b = " << this->b << " c = " << this->c << std::endl;
-            std::cout << "Углы: " << "A = " << this->A << " B = " << this->B << " C = " << this->C << std::endl;
-        }
-        else if (Nsides == 4) {
-            std::cout << "Стороны: " << "a = " << this->a << " b = " << this->b << " c = " << this->c << " d = " << this->d << std::endl;
-            std::cout << "Углы: " << "A = " << this->A << " B = " << this->B << " C = " << this->C << " D = " << this->D << std::endl;
-        }
     }
     virtual void check() {
         if (this->Nsides == 0) {
@@ -43,24 +27,33 @@ public:
 };
 
 class Triangle : public Figure {
+protected:
+    int a;
+    int b;
+    int c;
+    int A;
+    int B;
+    int C;
 
 public:
-    Triangle() {
-        this->a = 10;
-        this->b = 20;
-        this->c = 30;
-        this->A = 60;
-        this->B = 60;
-        this->C = 60;
+    Triangle(int aa, int ab, int ac, int aA, int aB, int aC) {
+        this->a = aa;
+        this->b = ab;
+        this->c = ac;
+        this->A = aA;
+        this->B = aB;
+        this->C = aC;
         this->Nsides = 3;
         this->name = "Треугольник";
     }
 
     void print() override {
         Figure::print();
+        std::cout << "Стороны: " << "a = " << this->a << " b = " << this->b << " c = " << this->c << std::endl;
+        std::cout << "Углы: " << "A = " << this->A << " B = " << this->B << " C = " << this->C << std::endl;
     }
     void check() override {
-        if (this->Nsides == 3 && (this->A+ this->B+ this->C == 180)) {
+        if (this->Nsides == 3 && (this->A + this->B + this->C == 180)) {
             boolean = "Правильная";
         }
         else {
@@ -70,26 +63,31 @@ public:
 
 };
 
-class RightTriangle : public Figure {
-  
+class RightTriangle : public Triangle {
+
 public:
-    RightTriangle() {
-        this->a = 10;
-        this->b = 20;
-        this->c = 30;
-        this->A = 50;
-        this->B = 60;
-        this->C = 90;
-        this->Nsides = 3;
+    RightTriangle(int aa, int ab, int ac, int aA, int aB, int aC) : Triangle (aa, ab, ac, aA, aB, aC) {
+        this->a = aa;
+        this->b = ab;
+        this->c = ac;
+        this->A = aA;
+        this->B = aB;
+        this->C = aC;
         this->name = "Прямоугольный треугольник";
     }
 
     void print() override {
-        Figure::print();
+        Triangle::print();
     }
     void check() override {
-        if (this->C == 90) {
-            boolean = "Правильная";
+        Triangle::check();
+        if (boolean == "Правильная") {
+            if (this->C == 90 || this->B == 90 || this->A == 90) {
+                boolean = "Правильная";
+            }
+            else {
+                boolean = "Неправильная";
+            }
         }
         else {
             boolean = "Неправильная";
@@ -97,53 +95,66 @@ public:
     }
 };
 
-class Isoscelestriangle : public Figure {
+class Isoscelestriangle : public Triangle {
 
 public:
-    Isoscelestriangle() {
-        this->a = 10;
-        this->b = 20;
-        this->c = 10;
-        this->A = 50;
-        this->B = 60;
-        this->C = 50;
+    Isoscelestriangle(int aa, int ab, int ac, int aA, int aB, int aC) : Triangle(aa, ab, ac, aA, aB, aC) {
+        this->a = aa;
+        this->b = ab;
+        this->c = ac;
+        this->A = aA;
+        this->B = aB;
+        this->C = aC;
         this->Nsides = 3;
         this->name = "Равнобедренный треугольник";
     }
 
     void print() override {
-        Figure::print();
+        Triangle::print();
     }
     void check() override {
-        if ((a == c) && (A==C)) {
-            boolean = "Правильная";
+        Triangle::check();
+        if (boolean == "Правильная") {
+            if ((a == c) && (A == C)) {
+                boolean = "Правильная";
+            }
+            else {
+                boolean = "Неправильная";
+            }
         }
         else {
             boolean = "Неправильная";
         }
     }
+
 };
 
-class EquilateralTriangle : public Figure {
+class EquilateralTriangle : public Triangle {
 
 public:
-    EquilateralTriangle() {
-        this->a = 10;
-        this->b = 10;
-        this->c = 10;
-        this->A = 60;
-        this->B = 60;
-        this->C = 60;
+    EquilateralTriangle(int aa, int ab, int ac, int aA, int aB, int aC) : Triangle(aa, ab, ac, aA, aB, aC) {
+        this->a = aa;
+        this->b = ab;
+        this->c = ac;
+        this->A = aA;
+        this->B = aB;
+        this->C = aC;
         this->Nsides = 3;
         this->name = "Равносторонний треугольник";
     }
 
     void print() override {
-        Figure::print();
+        Triangle::print();
     }
     void check() override {
-        if ((a == c && a==b) && (A == 60 && B == 60 && C == 60)) {
-            boolean = "Правильная";
+        Triangle::check();
+        if (boolean == "Правильная") {
+            if ((a == c && a == b) && (A == 60 && B == 60 && C == 60)) {
+                boolean = "Правильная";
+            }
+            else {
+                boolean = "Неправильная";
+            }
         }
         else {
             boolean = "Неправильная";
@@ -152,23 +163,33 @@ public:
 };
 
 class Quadrilateral : public Figure {
-
+protected:
+    int a;
+    int b;
+    int c;
+    int d;
+    int A;
+    int B;
+    int C;
+    int D;
 public:
-    Quadrilateral() {
-        this->a = 10;
-        this->b = 20;
-        this->c = 30;
-        this->d = 40;
-        this->A = 90;
-        this->B = 90;
-        this->C = 90;
-        this->D = 90;
+    Quadrilateral (int aa, int ab, int ac, int ad, int aA, int aB, int aC, int aD) {
+        this->a = aa;
+        this->b = ab;
+        this->c = ac;
+        this->d = ad;
+        this->A = aA;
+        this->B = aB;
+        this->C = aC;
+        this->D = aD;
         this->Nsides = 4;
         this->name = "Четырёхугольник";
     }
 
     void print() override {
         Figure::print();
+        std::cout << "Стороны: " << "a = " << this->a << " b = " << this->b << " c = " << this->c << " d = " << this->d << std::endl;
+        std::cout << "Углы: " << "A = " << this->A << " B = " << this->B << " C = " << this->C << " D = " << this->D << std::endl;
     }
     void check() override {
         if (A+B+C+D == 360) {
@@ -180,28 +201,33 @@ public:
     }
 };
 
-class Rectangles : public Figure {
+class Rectangles : public Quadrilateral {
 
 public:
-    Rectangles() {
-        this->a = 10;
-        this->b = 20;
-        this->c = 10;
-        this->d = 20;
-        this->A = 90;
-        this->B = 90;
-        this->C = 90;
-        this->D = 90;
-        this->Nsides = 4;
+    Rectangles (int aa, int ab, int ac, int ad, int aA, int aB, int aC, int aD) : Quadrilateral(aa, ab, ac, ad, aA, aB, aC, aD) {
+        this->a = aa;
+        this->b = ab;
+        this->c = ac;
+        this->d = ad;
+        this->A = aA;
+        this->B = aB;
+        this->C = aC;
+        this->D = aD;
         this->name = "Прямоугольник";
     }
 
     void print() override {
-        Figure::print();
+        Quadrilateral::print();
     }
     void check() override {
-        if ((a==c && b==d) && (A==90 && B==90 && C==90 && D==90)) {
-            boolean = "Правильная";
+        Quadrilateral::check();
+        if (boolean == "Правильная") {
+            if ((a == c && b == d) && (A == 90 && B == 90 && C == 90 && D == 90)) {
+                boolean = "Правильная";
+            }
+            else {
+                boolean = "Неправильная";
+            }
         }
         else {
             boolean = "Неправильная";
@@ -209,28 +235,33 @@ public:
     }
 };
 
-class Square : public Figure {
+class Square : public Quadrilateral {
 
 public:
-    Square() {
-        this->a = 10;
-        this->b = 10;
-        this->c = 10;
-        this->d = 10;
-        this->A = 90;
-        this->B = 90;
-        this->C = 90;
-        this->D = 90;
-        this->Nsides = 4;
+    Square(int aa, int ab, int ac, int ad, int aA, int aB, int aC, int aD) : Quadrilateral(aa, ab, ac, ad, aA, aB, aC, aD) {
+        this->a = aa;
+        this->b = ab;
+        this->c = ac;
+        this->d = ad;
+        this->A = aA;
+        this->B = aB;
+        this->C = aC;
+        this->D = aD;
         this->name = "Квадрат";
     }
 
     void print() override {
-        Figure::print();
+        Quadrilateral::print();
     }
     void check() override {
-        if ((a == c && a == b && a == d) && (A == 90 && B == 90 && C == 90 && D == 90)) {
-            boolean = "Правильная";
+        Quadrilateral::check();
+        if (boolean == "Правильная") {
+            if ((a == c && a == b && a == d) && (A == 90 && B == 90 && C == 90 && D == 90)) {
+                boolean = "Правильная";
+            }
+            else {
+                boolean = "Неправильная";
+            }
         }
         else {
             boolean = "Неправильная";
@@ -238,28 +269,33 @@ public:
     }
 };
 
-class Parallelogram : public Figure {
+class Parallelogram : public Quadrilateral {
 
 public:
-    Parallelogram() {
-        this->a = 10;
-        this->b = 10;
-        this->c = 10;
-        this->d = 10;
-        this->A = 90;
-        this->B = 90;
-        this->C = 90;
-        this->D = 90;
-        this->Nsides = 4;
+    Parallelogram(int aa, int ab, int ac, int ad, int aA, int aB, int aC, int aD) : Quadrilateral(aa, ab, ac, ad, aA, aB, aC, aD) {
+        this->a = aa;
+        this->b = ab;
+        this->c = ac;
+        this->d = ad;
+        this->A = aA;
+        this->B = aB;
+        this->C = aC;
+        this->D = aD;
         this->name = "Параллелограмм";
     }
 
     void print() override {
-        Figure::print();
+        Quadrilateral::print();
     }
     void check() override {
-        if ((a == c && b == d) && (A == C && B == D)) {
-            boolean = "Правильная";
+        Quadrilateral::check();
+        if (boolean == "Правильная") {
+            if ((a == c && b == d) && (A == C && B == D)) {
+                boolean = "Правильная";
+            }
+            else {
+                boolean = "Неправильная";
+            }
         }
         else {
             boolean = "Неправильная";
@@ -268,36 +304,38 @@ public:
 
 };
 
-class Rhomb : public Figure {
-private:
+class Rhomb : public Quadrilateral {
  
-
 public:
-    Rhomb() {
-        this->a = 10;
-        this->b = 10;
-        this->c = 10;
-        this->d = 10;
-        this->A = 90;
-        this->B = 90;
-        this->C = 90;
-        this->D = 90;
-        this->Nsides = 4;
+    Rhomb(int aa, int ab, int ac, int ad, int aA, int aB, int aC, int aD) : Quadrilateral(aa, ab, ac, ad, aA, aB, aC, aD) {
+        this->a = aa;
+        this->b = ab;
+        this->c = ac;
+        this->d = ad;
+        this->A = aA;
+        this->B = aB;
+        this->C = aC;
+        this->D = aD;
         this->name = "Ромб";
     }
 
     void print() override {
-        Figure::print();
+        Quadrilateral::print();
     }
     void check() override {
-        if ((a == c && a == b && a == d) && (A == C && B == D)) {
-            boolean = "Правильная";
+        Quadrilateral::check();
+        if (boolean == "Правильная") {
+            if ((a == c && a == b && a == d) && (A == C && B == D)) {
+                boolean = "Правильная";
+            }
+            else {
+                boolean = "Неправильная";
+            }
         }
         else {
             boolean = "Неправильная";
         }
     }
-
 };
 
 void print_info(Figure* figure) {
@@ -311,15 +349,15 @@ int main()
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
     
-    Triangle triangle;
-    RightTriangle rightTriangle;
-    Isoscelestriangle isoscelestriangle;
-    EquilateralTriangle equilateralTriangle;
-    Quadrilateral quadrilateral;
-    Rectangles rectangle;
-    Square square;
-    Parallelogram parallelogram;
-    Rhomb rhomb;
+    Triangle triangle(10, 20, 30, 70, 40, 70);
+    RightTriangle rightTriangle(10, 20, 30, 30, 60, 90);
+    Isoscelestriangle isoscelestriangle(10, 20, 10, 60, 60, 60);
+    EquilateralTriangle equilateralTriangle(10, 10, 10, 60, 60, 60);
+    Quadrilateral quadrilateral(10, 20, 30, 70, 60, 70, 40, 40);
+    Rectangles rectangle(10, 20, 30, 70, 60, 70, 40, 40);
+    Square square(10, 20, 30, 70, 60, 70, 40, 40);
+    Parallelogram parallelogram(10, 20, 30, 70, 60, 70, 40, 40);
+    Rhomb rhomb(10, 10, 10, 10, 80, 100, 80, 100);
     Figure figure;
 
     print_info(&figure);
