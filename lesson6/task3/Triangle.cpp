@@ -1,3 +1,5 @@
+
+
 #include "Triangle.h"
 #include <iostream>
 
@@ -9,6 +11,7 @@
         this->A = aA;
         this->B = aB;
         this->C = aC;
+      
     }
 
     void Triangle::print() {

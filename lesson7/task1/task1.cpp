@@ -4,7 +4,7 @@
 #include <locale>
 #include <Windows.h>
 
-#define MODE 3
+//#define MODE 3
 
 int add(int x, int y) {
     return x + y;
@@ -31,9 +31,10 @@ int main()
     std::cout << "Результат сложения: " << add(x, y) << std::endl;
     #else 
     std::cout << "Неизвестный режим. Завершение работы" << std::endl;
+
     #endif
 #else 
-    std::cout << "Необходимо определить MODE" << std::endl;
+#error  Необходимо определить MODE
 #endif
 
 }

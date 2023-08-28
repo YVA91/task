@@ -1,8 +1,6 @@
 #pragma once
 #include "Figure.h"
-
-
-class Triangle :
+class EquilateralTriangle :
     public Figure
 {
 private:
@@ -14,6 +12,7 @@ private:
     int C;
 
 public:
-    Triangle(int aa, int ab, int ac, int aA, int aB, int aC);
+    EquilateralTriangle(int aa, int ab, int ac, int aA, int aB, int aC);
+
     void print() override;
 };

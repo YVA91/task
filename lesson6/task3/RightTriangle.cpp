@@ -1,6 +1,7 @@
 #include "RightTriangle.h"
 #include <iostream>
 
+
     RightTriangle::RightTriangle(int aa, int ab, int ac, int aA, int aB) {
         this->a = aa;
         this->b = ab;

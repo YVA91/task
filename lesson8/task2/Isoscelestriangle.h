@@ -2,16 +2,19 @@
 #include "Figure.h"
 
 
-class Rhomb :
+class Isoscelestriangle :
     public Figure
 {
     private:
         int a;
+        int b;
+        int c;
         int A;
         int B;
+        int C;
 
     public:
-        Rhomb(int aa, int aA, int aB);
+        Isoscelestriangle(int aa, int ab, int ac, int aA, int aB, int aC);
 
         void print() override;
 };

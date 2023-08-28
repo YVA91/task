@@ -1,8 +1,7 @@
 #pragma once
 #include "Figure.h"
 
-
-class Triangle :
+class RightTriangle :
     public Figure
 {
 private:
@@ -14,6 +13,7 @@ private:
     int C;
 
 public:
-    Triangle(int aa, int ab, int ac, int aA, int aB, int aC);
+    RightTriangle(int aa, int ab, int ac, int aA, int aB, int aC);
+
     void print() override;
 };

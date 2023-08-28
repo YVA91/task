@@ -1,5 +1,7 @@
 #pragma once
 #include "Figure.h"
+
+
 class Isoscelestriangle :
     public Figure
 {

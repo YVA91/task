@@ -1,6 +1,6 @@
 #pragma once
 #include "Figure.h"
-
+//#include "Error.h"
 
 class Triangle :
     public Figure
