@@ -14,7 +14,8 @@ int function(std::string str, int forbidden_length) {
     return x;
 }
 
-void recursion() {
+int main()
+{
     setlocale(LC_ALL, "Russian");
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
@@ -23,18 +24,19 @@ void recursion() {
     std::string str;
     std::cout << "Введите запретную длину: ";
     std::cin >> z;
-    std::cout << "Введите слово: ";
-    std::cin >> str;
 
-    try {
-        std::cout << "Длина слова " << "\"" << str << "\"" << " равна " << function(str, z) << std::endl;
-        recursion();
+    while (true)
+    {
+        std::cout << "Введите слово: ";
+        std::cin >> str;
+        try {
+            std::cout << "Длина слова " << "\"" << str << "\"" << " равна " << function(str, z) << std::endl;
+        }
+        catch (const std::length_error& ex) { 
+            std::cout << ex.what() << std::endl;
+            return 0;
+        }
     }
-    catch (const std::length_error& ex) { std::cout << ex.what() << std::endl; }
-}
 
-int main()
-{
-    recursion();
 }
 
