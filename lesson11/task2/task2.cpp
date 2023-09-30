@@ -2,7 +2,7 @@
 #include <iostream>
 #include <locale>
 #include <Windows.h>
-#include "Leaver.h"
+#include "LeaverLib/Leaver.h"
 
 int main()
 {
@@ -19,4 +19,3 @@ int main()
 
     system("pause");
 }
-
